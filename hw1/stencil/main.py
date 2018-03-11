@@ -1,6 +1,6 @@
 import random
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from get_data import get_data
 from decision_tree import DecisionTree, train_error, entropy, gini_index
 

@@ -119,14 +119,13 @@ class DecisionTree:
         '''
         loss_validation = self.loss(validation_data)
         if not node.isleaf and not node.left.isleaf and not node.right.isleaf:
-            data_left = np.array(validation_data)[np.array(validation_data)[:, node.index_split_on] == False, :].tolist()
-            data_right = np.array(validation_data)[np.array(validation_data)[:, node.index_split_on] == True, :].tolist()
+            data_left = np.array(validation_data)[np.array(validation_data)[:, node.index_split_on] is False, :].tolist()
+            data_right = np.array(validation_data)[np.array(validation_data)[:, node.index_split_on] is True, :].tolist()
             if self.loss(data_left) + self.loss(data_right) > loss_validation:
                 node.isleaf, node.label = True, -1
                 node.right, node.left = None, None
             self._predict_recurs(node.left, data_left)
             self._predict_recurs(node.right, data_right)
-
 
     def _is_terminal(self, node, data, indices):
         '''
@@ -141,7 +140,7 @@ class DecisionTree:
             - A boolean, True indicating the current node should be a leaf.
             - A label, indicating the label of the leaf (-1 if False)
         '''
-        if len(data) == 0 or len(indices) == 0 or node.depth > self.max_depth or node.right == None or node.left == None:
+        if len(data) == 0 or len(indices) == 0 or node.depth > self.max_depth or node.right is None or node.left is None:
             return (True, -1)
 
     def _split_recurs(self, node, rows, indices):
@@ -161,12 +160,12 @@ class DecisionTree:
                 gain_cols.append(self._calc_gain(rows, i, self.gain_function))
             node.index_split_on = np.argmax(gain_cols)
             node.label = self.predict([row[node.index_split_on] for row in rows])
-            node.left = Node(depth=node.depth+1, label=0)
-            node.right = Node(depth=node.depth+1, label=1)
+            node.left = Node(depth=node.depth + 1, label=0)
+            node.right = Node(depth=node.depth + 1, label=1)
             indices.remove(indices[np.argmax(gain_cols)])
             node.isleaf, node.label = self._is_terminal(node, rows, indices)
-            data_left = [row for row in rows if row[node.index_split_on] == False]
-            data_right = [row for row in rows if row[node.index_split_on] == True]
+            data_left = [row for row in rows if row[node.index_split_on] is False]
+            data_right = [row for row in rows if row[node.index_split_on] is True]
             if len(data_left) != 0:
                 self._split_recurs(node.left, data_left, indices)
             else:
@@ -185,10 +184,10 @@ class DecisionTree:
         considering training error gain. Other alternatives are entropy and gini functions.
         '''
         x_i = [row[split_index] for row in data]
-        data_true = [row for i, row in enumerate(data) if x_i[i] == True]
-        data_false = [row for i, row in enumerate(data) if x_i[i] == False]
-        p_true = sum([x == True for x in x_i]) / len(x_i)
-        gain = gain_function(data) - (p_true * gain_function(data_true) * (1 - p_true) * gain_function(data_false))
+        data_true = [row for i, row in enumerate(data) if x_i[i] is True]
+        data_false = [row for i, row in enumerate(data) if x_i[i] is False]
+        p_true = sum([x is True for x in x_i]) / len(x_i)
+        gain = gain_function(data) - (p_true * gain_function(data_true) + (1 - p_true) * gain_function(data_false))
         return gain
 
     def print_tree(self):
