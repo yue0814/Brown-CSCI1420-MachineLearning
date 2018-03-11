@@ -40,16 +40,16 @@ def explore_dataset(filename, class_name):
     #      (b) Print average test loss (not-pruned)
     #      (c) Print average training loss (pruned)
     #      (d) Print average test loss (pruned)
-    d1 = DecisionTree(train_data, validation_data=validation_data, gain_function=train_error)
-    d2 = DecisionTree(train_data, validation_data=validation_data, gain_function=entropy)
-    d3 = DecisionTree(train_data, validation_data=validation_data, gain_function=gini_index)
+    d1 = DecisionTree(train_data, gain_function=train_error)
+    d2 = DecisionTree(train_data, gain_function=entropy)
+    d3 = DecisionTree(train_data, gain_function=gini_index)
 
     d1.print_tree()
-    d1.loss_plot_vec(train_data)
-    d2.print_tree()
-    d2.loss_plot_vec(train_data)
-    d3.print_tree()
-    d3.loss_plot_vec(train_data)
+    # d1.loss_plot_vec(train_data)
+    # d2.print_tree()
+    # d2.loss_plot_vec(train_data)
+    # d3.print_tree()
+    # d3.loss_plot_vec(train_data)
     # TODO: Feel free to print or plot anything you like here. Just comment
     # make sure to comment it out, or put it in a function that isn't called
     # by default when you hand in your code!
