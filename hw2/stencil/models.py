@@ -30,7 +30,7 @@ class NaiveBayes(object):
         @return:
             None
         """
-        # TODO
+        # TODO:
 
     def predict(self, inputs):
         """ Outputs a predicted label for each input in inputs.
@@ -40,7 +40,7 @@ class NaiveBayes(object):
         @return:
             a numpy array of predictions
         """
-        #TODO
+        #TODO:
 
     def accuracy(self, data):
         """ Outputs the accuracy of the trained model on a given dataset (data).
@@ -51,7 +51,7 @@ class NaiveBayes(object):
         @return:
             a float number indicating accuracy (between 0 and 1)
         """
-        #TODO
+        #TODO:
 
 
 class LogisticRegression(object):
@@ -78,7 +78,7 @@ class LogisticRegression(object):
         @return:
             None
         """
-        #TODO
+        #TODO:
 
     def predict(self, inputs):
         """ Compute predictions based on the learned parameters
@@ -88,7 +88,7 @@ class LogisticRegression(object):
         @return:
             None
         """
-        #TODO
+        #TODO:
 
     def accuracy(self, data):
         """ Outputs the accuracy of the trained model on a given dataset (data).
@@ -99,7 +99,7 @@ class LogisticRegression(object):
         @return:
             a float number indicating accuracy (between 0 and 1)
         """
-        #TODO
+        #TODO:
 
     def _softmax(self, x):
         """ apply softmax to an array

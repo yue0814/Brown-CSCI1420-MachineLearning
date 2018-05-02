@@ -1,5 +1,3 @@
-# Brown-CSCI1420-MachineLearning
-
 ### hw1
 1. decision tree.py contains the DecisionTree class. We have left most of the methods in this class
 for you to implement.
